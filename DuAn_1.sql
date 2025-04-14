@@ -12,7 +12,6 @@ CREATE TABLE SanPham (
                          HienThi VARCHAR(50) DEFAULT 'Hien'
 );
 
--- Create triggers for SanPham (MySQL requires separate triggers for INSERT and UPDATE)
 DELIMITER //
 
 CREATE TRIGGER trg_Unique_MaSP_Insert BEFORE INSERT ON SanPham
