@@ -242,6 +242,8 @@ public class Login extends javax.swing.JFrame {
         // }
         // }
         // }
+        this.nv = new NhanVien();
+        nv.setChucVu("nv");
         return true;
     }
 

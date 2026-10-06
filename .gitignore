@@ -263,3 +263,5 @@ $RECYCLE.BIN/
 
 .settings
 .idea
+.env
+.envrc
