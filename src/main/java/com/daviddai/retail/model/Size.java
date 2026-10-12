@@ -1,31 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.daviddai.retail.model;
 
-/**
- *
- * @author acer
- */
+import java.time.LocalDateTime;
+
 public class Size {
+
     private Integer id;
-    private String maSize;
-    private String tenSize;
+
+    private String code;
+
+    private String name;
+
+    private LocalDateTime createdAt;
+
+    private boolean isActive = true;
 
     public Size() {
     }
 
-    public Size(Integer id, String maSize, String tenSize) {
+    public Size(Integer id, String code, String name, LocalDateTime createdAt, boolean isActive) {
         this.id = id;
-        this.maSize = maSize;
-        this.tenSize = tenSize;
+        this.code = code;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.isActive = isActive;
     }
-    
-    public Object[] getSize(){
-        return new Object[]{id,maSize,tenSize};
-    }
-    
+
     public Integer getId() {
         return id;
     }
@@ -34,20 +33,61 @@ public class Size {
         this.id = id;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public Size(Integer id, String maSize, String tenSize) {
+        this.id = id;
+        this.code = maSize;
+        this.name = tenSize;
+    }
+
     public String getMaSize() {
-        return maSize;
+        return code;
     }
 
     public void setMaSize(String maSize) {
-        this.maSize = maSize;
+        this.code = maSize;
     }
 
     public String getTenSize() {
-        return tenSize;
+        return name;
     }
 
     public void setTenSize(String tenSize) {
-        this.tenSize = tenSize;
+        this.name = tenSize;
     }
-    
+
+    public Object[] getSize() {
+        return new Object[] { id, code, name };
+    }
 }
