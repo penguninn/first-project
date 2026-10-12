@@ -1,69 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.daviddai.retail</groupId>
-  <artifactId>Project1</artifactId>
+  <artifactId>retail-app</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+  <name>Retail Application</name>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
-    <exec.mainClass>com.daviddai.retail.UI.Login</exec.mainClass>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.release>21</maven.compiler.release>
+
+    <!-- Versions -->
+    <postgresql.version>42.7.13</postgresql.version>
+    <hikaricp.version>5.1.0</hikaricp.version>
+    <slf4j.version>2.0.13</slf4j.version>
+    <logback.version>1.5.6</logback.version>
+    <junit.version>5.10.2</junit.version>
+    <flatlaf.version>3.4.1</flatlaf.version>
+    <miglayout.version>11.4.2</miglayout.version>
+    <exec.plugin.version>3.2.0</exec.plugin.version>
+    <surefire.version>3.2.5</surefire.version>
   </properties>
+
   <dependencies>
     <dependency>
-      <groupId>org.jdesktop</groupId>
-      <artifactId>timingframework</artifactId>
-      <version>0.55</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/src/main/resources/com/daviddai/retail/library/TimingFramework-0.55.jar</systemPath>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+      <version>6.5.10</version>
     </dependency>
-    <dependency>
-      <groupId>org.jdesktop</groupId>
-      <artifactId>jnafilechooser</artifactId>
-      <version>1.0.3</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/src/main/resources/com/daviddai/retail/library/swing-jnafilechooser.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>com.miglayout</groupId>
-      <artifactId>miglayout</artifactId>
-      <version>3.7.4</version>
-    </dependency>
-    <dependency>
-      <groupId>org.swinglabs</groupId>
-      <artifactId>swingx</artifactId>
-      <version>1.6.1</version>
-    </dependency>
+    <!-- ========== DATABASE ========== -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
-      <version>42.7.13</version>
-      <scope>compile</scope>
+      <version>${postgresql.version}</version>
     </dependency>
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
-      <version>7.1.0</version>
-      <scope>compile</scope>
+      <version>${hikaricp.version}</version>
     </dependency>
+
+    <!-- ========== LOGGING ========== -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+
+    <!-- ========== UI ========== -->
     <dependency>
       <groupId>com.formdev</groupId>
       <artifactId>flatlaf</artifactId>
-      <version>3.4.1</version>
+      <version>${flatlaf.version}</version>
     </dependency>
     <dependency>
       <groupId>com.formdev</groupId>
       <artifactId>flatlaf-extras</artifactId>
-      <version>3.4.1</version>
+      <version>${flatlaf.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.formdev</groupId>
-      <artifactId>flatlaf-fonts-roboto</artifactId>
-      <version>2.137</version>
+      <groupId>com.miglayout</groupId>
+      <artifactId>miglayout-swing</artifactId>
+      <version>${miglayout.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jdesktop</groupId>
+      <artifactId>timingframework</artifactId>
+      <version>0.55</version>
     </dependency>
     <dependency>
       <groupId>com.toedter</groupId>
@@ -71,59 +84,57 @@
       <version>1.4</version>
     </dependency>
     <dependency>
-      <groupId>com.github.weisj</groupId>
-      <artifactId>jsvg</artifactId>
-      <version>1.5.0</version>
+      <groupId>local.libs</groupId>
+      <artifactId>swing-jnafilechooser</artifactId>
+      <version>1.0</version>
     </dependency>
+
+    <!-- ========== TEST ========== -->
     <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>5.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>5.3.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.itextpdf</groupId>
-      <artifactId>itext7-core</artifactId>
-      <version>7.2.0</version>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>net.java.dev.jna</groupId>
-      <artifactId>jna</artifactId>
-      <version>5.14.0</version>
-    </dependency>
-    <dependency>
-      <groupId>net.java.dev.jna</groupId>
-      <artifactId>jna-platform</artifactId>
-      <version>5.14.0</version>
-    </dependency>
-    <dependency>
-      <groupId>jfree</groupId>
-      <artifactId>jfreechart</artifactId>
-      <version>1.0.13</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
+      <!-- Compiler -->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.6.4</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
         <configuration>
-          <mainClass>com.daviddai.retail.UI.Login</mainClass>
-          <additionalClasspathElements>
-            <additionalClasspathElement>
-              ${project.basedir}/src/main/resources/com/daviddai/retail/library/TimingFramework-0.55.jar</additionalClasspathElement>
-            <additionalClasspathElement>
-              ${project.basedir}/src/main/resources/com/daviddai/retail/library/swing-jnafilechooser.jar</additionalClasspathElement>
-            <additionalClasspathElement>
-              ${project.basedir}/src/main/resources/com/daviddai/retail/library/jcalendar-1.4.jar</additionalClasspathElement>
-          </additionalClasspathElements>
+          <release>21</release>
+          <encoding>UTF-8</encoding>
+          <excludes>
+            <exclude>**/io/**</exclude>
+            <exclude>**/ScrollBar/**</exclude>
+            <exclude>**/UI/**</exclude>
+            <exclude>**/blankchart/**</exclude>
+            <exclude>**/chart/**</exclude>
+            <exclude>**/combo_suggestion/**</exclude>
+            <exclude>**/combobox/**</exclude>
+            <exclude>**/customTable/**</exclude>
+            <exclude>**/enum/**</exclude>
+            <exclude>**/event/**</exclude>
+            <exclude>**/form/**</exclude>
+            <exclude>**/modelUI/**</exclude>
+            <exclude>**/radiobutton/**</exclude>
+            <exclude>**/repo/**</exclude>
+            <exclude>**/searchbar/**</exclude>
+            <exclude>**/swing/**</exclude>
+            <exclude>**/table/**</exclude>
+          </excludes>
         </configuration>
+      </plugin>
+
+      <!-- JUnit 5 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.version}</version>
       </plugin>
     </plugins>
   </build>
