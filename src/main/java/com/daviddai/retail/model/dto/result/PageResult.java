@@ -1,0 +1,10 @@
+package com.daviddai.retail.model.dto.result;
+
+import java.util.List;
+
+public record PageResult<T>(
+        List<T> items,
+        int page,
+        int size,
+        int totalItems) {
+}
