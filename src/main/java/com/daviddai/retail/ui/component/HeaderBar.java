@@ -85,7 +85,7 @@ public class HeaderBar extends JPanel {
 
     private JPanel createLogoPanel() {
         JPanel panel = new JPanel(new MigLayout(
-                "fill, align center center, insets 0 30 0 30, gap 20",
+                "fill, align center center, insets 0 15 0 15, gap 10",
                 "[grow][grow]",
                 "[30!]")) {
 
@@ -111,7 +111,7 @@ public class HeaderBar extends JPanel {
         panel.setOpaque(false);
 
         JLabel icon = new JLabel(UiUtils.loadIcon("shopping_cart_blue"));
-        JLabel title = new JLabel("Pengunin");
+        JLabel title = new JLabel("Shop Pengunin");
         title.setFont(new Font("Segoe UI", Font.BOLD, 18));
         title.setForeground(Color.WHITE);
 

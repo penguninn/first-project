@@ -198,3 +198,4 @@ CREATE INDEX idx_item_variant ON invoice_item (variant_id);
 
 
 INSERT INTO customer (code, full_name) VALUES ('KL', 'Khách lẻ');
+

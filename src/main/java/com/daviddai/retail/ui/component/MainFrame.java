@@ -1,8 +1,11 @@
 package com.daviddai.retail.ui.component;
 
+import com.daviddai.retail.app.AppContext;
 import com.daviddai.retail.model.dto.result.EmployeeResult;
 import com.daviddai.retail.ui.component.sidebar.SidebarMenu;
+import com.daviddai.retail.ui.product.ProductPresenter;
 import com.daviddai.retail.ui.product.ProductScreen;
+import com.daviddai.retail.ui.product.ProductView;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -75,7 +78,11 @@ public class MainFrame extends JFrame {
     // ===== Screens =====
     private void initScreens() {
         registerScreen(Screen.HOME, () -> placeholder("Home"));
-        registerScreen(Screen.PRODUCTS, () -> new ProductScreen());
+        registerScreen(Screen.PRODUCTS, () -> {
+            ProductView view = new ProductScreen();
+            new ProductPresenter(view, AppContext.getInstance().getProductService());
+            return (ProductScreen) view;
+        });
         registerScreen(Screen.SELL, () -> placeholder("Bán hàng"));
         registerScreen(Screen.BILL, () -> placeholder("Hóa đơn"));
         registerScreen(Screen.PROMOTION, () -> placeholder("Khuyến mãi"));
@@ -121,21 +128,17 @@ public class MainFrame extends JFrame {
 
     // ===== Events =====
     private void initEvents() {
-        // ---- Sidebar → điều hướng màn hình ----
         sidebarMenu.setOnScreenSelected(this::showScreen);
         sidebarMenu.setOnLogout(this::onLogout);
 
-        // ---- Header → điều khiển cửa sổ ----
         headerBar.setOnClose(this::onExit);
         headerBar.setOnMinimize(() -> setState(Frame.ICONIFIED));
         headerBar.setOnMaximize(this::toggleMaximize);
         headerBar.setOnProfileClick(() -> sidebarMenu.select(Screen.PROFILE));
 
-        // Cho phép kéo cửa sổ bằng HeaderBar
         headerBar.enableDragging(this);
 
-        // ---- Màn hình mặc định ----
-        sidebarMenu.select(Screen.HOME); // → trigger showScreen(HOME) + highlight
+        sidebarMenu.select(Screen.HOME);
     }
 
     // ===== Public API =====

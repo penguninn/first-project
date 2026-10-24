@@ -9,11 +9,15 @@ import com.daviddai.retail.config.BcryptPasswordEncoder;
 import com.daviddai.retail.config.DataSourceFactory;
 import com.daviddai.retail.config.PasswordEncoder;
 import com.daviddai.retail.dao.EmployeeDao;
+import com.daviddai.retail.dao.ProductDao;
 import com.daviddai.retail.dao.impl.employee.EmployeeDaoJdbc;
+import com.daviddai.retail.dao.impl.product.ProductDaoJdbc;
 import com.daviddai.retail.service.AuthService;
 import com.daviddai.retail.service.EmployeeService;
+import com.daviddai.retail.service.ProductService;
 import com.daviddai.retail.service.impl.AuthServiceImpl;
 import com.daviddai.retail.service.impl.EmployeeServiceImpl;
+import com.daviddai.retail.service.impl.ProductServiceImpl;
 
 public final class AppContext implements AutoCloseable {
 
@@ -21,16 +25,24 @@ public final class AppContext implements AutoCloseable {
     private static volatile AppContext instance;
     private final DataSource dataSource;
     private final PasswordEncoder encoder;
+
     private final EmployeeDao employeeDao;
-    private final EmployeeService employeeService;
     private final AuthService authService;
+    private final EmployeeService employeeService;
+
+    private final ProductDao productDao;
+    private final ProductService productService;
 
     private AppContext() {
         this.dataSource = DataSourceFactory.create();
-        this.employeeDao = new EmployeeDaoJdbc(dataSource);
         this.encoder = new BcryptPasswordEncoder();
+
+        this.employeeDao = new EmployeeDaoJdbc(dataSource);
         this.authService = new AuthServiceImpl(employeeDao, encoder);
         this.employeeService = new EmployeeServiceImpl(employeeDao, encoder);
+
+        this.productDao = new ProductDaoJdbc(dataSource);
+        this.productService = new ProductServiceImpl(productDao);
     }
 
     public static AppContext getInstance() {
@@ -62,6 +74,10 @@ public final class AppContext implements AutoCloseable {
 
     public EmployeeService getEmployeeService() {
         return employeeService;
+    }
+
+    public ProductService getProductService() {
+        return productService;
     }
 
     @Override

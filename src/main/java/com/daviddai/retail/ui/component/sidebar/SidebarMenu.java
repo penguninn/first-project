@@ -77,12 +77,10 @@ public class SidebarMenu extends JPanel {
         if (selectedScreen == screen)
             return;
 
-        // Bỏ chọn item cũ
         SidebarItem prev = items.get(selectedScreen);
         if (prev != null)
             prev.setSelected(false);
 
-        // Chọn item mới
         selectedScreen = screen;
         SidebarItem curr = items.get(screen);
         if (curr != null)
@@ -107,7 +105,6 @@ public class SidebarMenu extends JPanel {
         this.onLogout = listener;
     }
 
-    /** Cho phép Shell chọn screen mặc định hoặc chuyển screen bằng code. */
     public void select(Screen screen) {
         selectScreen(screen);
     }

@@ -10,4 +10,28 @@ public record ProductResult(
         LocalDateTime createdAt,
         boolean isActive) {
 
+    public Integer id() {
+        return id;
+    }
+
+    public String code() {
+        return code;
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public String description() {
+        return description;
+    }
+
+    public LocalDateTime createdAt() {
+        return createdAt;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
 }
